@@ -1,0 +1,3 @@
+-main Main
+-cp src/
+-cs bin/Numerix/bin/Main.exe
