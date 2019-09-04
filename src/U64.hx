@@ -84,11 +84,11 @@ abstract U64(haxe.Int64) {
 		return ret == 1;
 	}
 
-	@:op(~a) public inline function not() {
+	@:op(~a) public inline function not():U64 {
 		return haxe.Int64.make(~this.high, ~this.low);
 	}
 
-	public inline function rotateRight(s) {
+	public inline function rotateRight(s):U64 {
 		var a0 = this.high;
 		var a1 = this.low;
 		if (s == 0 || s == 64) {
@@ -103,11 +103,11 @@ abstract U64(haxe.Int64) {
 		}
 	}
 
-	public inline function rotateLeft() {
-		return rotateRight(this, 64 - s);
+	public inline function rotateLeft(s):U64 {
+		return rotateRight(64 - s);
 	}
 
-	@:op(a << s) public inline function shiftLeft(s:Int) {
+	@:op(a << s) public inline function shiftLeft(s:Int):U64 {
 		var a0 = this.high;
 		var a1 = this.low;
 
@@ -122,7 +122,7 @@ abstract U64(haxe.Int64) {
 		}
 	}
 
-	@:op(a >> s) public inline function shiftRight(s:Int) {
+	@:op(a >> s) public inline function shiftRight(s:Int):U64 {
 		var a0 = this.high;
 		var a1 = this.low;
 		if (s == 0) {
@@ -136,7 +136,7 @@ abstract U64(haxe.Int64) {
 		}
 	}
 
-    @:op(a ^ b)  public inline function shiftRight(b:U64){
+    @:op(a ^ b)  public inline function xor(b:U64):U64{
         var a0 = this.high;
 		var a1 = this.low;
 		var b0 = cast(b, haxe.Int64).high;
