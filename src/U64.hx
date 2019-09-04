@@ -68,7 +68,7 @@ abstract U64(haxe.Int64) {
 		return haxe.Int64.make(a0 & b0, a1 & b1);
 	}
 
-	public inline function compare():Bool {
+	public inline function compare(b:U64):Bool {
 		var a0 = this.high;
 		var a1 = this.low;
 		var b0 = cast(b, haxe.Int64).high;
