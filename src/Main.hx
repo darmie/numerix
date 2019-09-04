@@ -16,5 +16,9 @@ class Main {
 		
 		var res:Int = i * cast i2;
 		trace(res);
+		var a:U64 = 3;
+		var b:U64 = 5;
+		var mul:Int = a + b;
+		trace(mul);
 	}
 }

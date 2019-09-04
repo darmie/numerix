@@ -22,8 +22,33 @@ abstract U32(I32) {
         #if java 
         return untyped __java__('(int){0}', this);
         #elseif js
-        this = untyped __js__('{0} <<< 0', this);
+        return untyped __js__('{0} >> 0', this);
         #end
     }
+
+    #if js
+    public static function min():U32{
+        return new U32(0x00000000);
+    }
+
+    public static function max():U32 {
+        return new U32(0xFFFFFFFF);
+    }
+
+    @:op(a+b) public inline function add(b:U32):U32 {
+        var a:I32 = this;
+        var _b:I32 = b;
+
+       return  cast(( a + b ) | 0);
+    }
+
+    public inline function rotateLeft(word:I32, shift:Int):U32 {
+		return new U32((word << shift) | (word >>> (32 - shift)));
+	}
+
+	public inline function rotateRight(word:I32, shift:Int):U32 {
+		return new U32((word << (32 - shift)) | (word >>> shift));
+	}
+    #end
 }
 #end
