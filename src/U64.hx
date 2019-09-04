@@ -3,7 +3,7 @@ package;
 #if cpp
 typedef U64 = cpp.UInt64;
 #elseif cs
-typedef U64 = cs.UInt64;
+typedef U64 = cs.types.UInt64;
 #elseif java
 abstract U64(haxe.Int64) {
 	inline function new(i:haxe.Int64) {
