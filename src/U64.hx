@@ -17,6 +17,25 @@ abstract U64(haxe.Int64) {
 	@:to public inline function toInt64():haxe.Int64 {
 		return untyped __java__('(long){0}', this);
 	}
+
+	@:to public inline function toInt():Int {
+		var v:haxe.Int64 = this;
+		return haxe.Int64.toInt(v);
+	}
+
+	@:to public inline function toDouble():Float {
+		var dvalue = untyped __java__('(double) ({0} & 0x7fffffffffffffffL)', this);
+		if (this < 0) {
+      		untyped __java__('{0} += 0x1.0p63', dvalue);
+    	}
+		return dvalue;
+	}
+
+	@:op(a >> s) public inline function shiftRight(s:Int):U64 {
+		return untyped __java__('({0} >> {1}) & 0xFFFFFFFFL', this, s);
+	}
+
+
 }
 #elseif js
 abstract U64(haxe.Int64) {

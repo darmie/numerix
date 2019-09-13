@@ -18,7 +18,7 @@ class Main {
 		trace(res);
 		var a:U64 = 3;
 		var b:U64 = 5;
-		var mul:Int = a << b;
+		var mul = a >> b;
 		trace(mul);
 	}
 }

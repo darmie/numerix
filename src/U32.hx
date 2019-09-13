@@ -14,7 +14,7 @@ abstract U32(I32) {
         #end   
     }
 
-    @:from public static inline function fromI32(i:I32):U32 {
+    @:from public static function fromI32(i:I32):U32 {
        return new U32(i); 
     }
 
@@ -25,6 +25,18 @@ abstract U32(I32) {
         return untyped __js__('{0} >> 0', this);
         #end
     }
+
+    @:to public inline function toInt():Int {
+        #if java 
+        return untyped __java__('(int){0}', this);
+        #elseif js
+        return untyped __js__('{0} >> 0', this);
+        #end
+    }
+
+    @:op(a >> s) public inline function shiftRight(s:Int):Int {
+		return untyped __java__('({0} >> {1}) & 0xFF', this, s);
+	}
 
     #if js
     public static function min():U32{
