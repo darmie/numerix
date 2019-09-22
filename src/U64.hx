@@ -5,9 +5,17 @@ typedef U64 = cpp.UInt64;
 #elseif cs
 typedef U64 = cs.types.UInt64;
 #elseif java
-abstract U64(haxe.Int64) {
+import numerix.ULong;
+
+
+@:forward(longValue)
+abstract U64(ULong) from ULong {
 	inline function new(i:haxe.Int64) {
-		this = untyped __java__('(long){0} & 0xFFFFFFFFL', i);
+		this = ULong.valueOf(untyped __java__('(long){0} & 0xFFFFFFFFL', i));
+	}
+
+	@:to public static inline function toULong(i:U64):ULong {
+		return ULong.valueOf(i.longValue());
 	}
 
 	@:from public static inline function fromInt64(i:haxe.Int64):U64 {
@@ -15,24 +23,45 @@ abstract U64(haxe.Int64) {
 	}
 
 	@:to public inline function toInt64():haxe.Int64 {
-		return untyped __java__('(long){0}', this);
+		return this.longValue();
 	}
 
 	@:to public inline function toInt():Int {
-		var v:haxe.Int64 = this;
-		return haxe.Int64.toInt(v);
+		return this.intValue();
 	}
 
-	@:to public inline function toDouble():Float {
-		var dvalue = untyped __java__('(double) ({0} & 0x7fffffffffffffffL)', this);
-		if (this < 0) {
-      		untyped __java__('{0} += 0x1.0p63', dvalue);
-    	}
-		return dvalue;
+	@:to public inline function toDouble() {
+		return this.doubleValue();
 	}
+
+	@:op(a+b) public function add(b:U64):U64 {
+		return this.add(b);
+	}
+
+	@:op(a+b) public function addInt(b:Int):U64 {
+		return this.addInt(b);
+	}
+
+	@:op(a+b) public function addI64(b:I64):U64 {
+		return this.addLong(b);
+	}
+
+	@:op(a-b) public function sub(b:U64):U64 {
+		return this.substract(b);
+	}
+
+	@:op(a-b) public function subI64(b:I64):U64 {
+		return this.subtractI64(b);
+	}
+
+	@:op(a-b) public function subI32(b:I32):U64 {
+		return this.subtractI32(b);
+	}
+
+
 
 	@:op(a >> s) public inline function shiftRight(s:Int):U64 {
-		return untyped __java__('({0} >> {1}) & 0xFFFFFFFFL', this, s);
+		return ULong.valueOf(untyped __java__('({0} >> {1}) & 0xFFFFFFFFL', this.longValue(), s));
 	}
 
 
