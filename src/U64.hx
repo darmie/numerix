@@ -14,7 +14,7 @@ abstract U64(ULong) from ULong {
 		this = ULong.valueOf(untyped __java__('(long){0} & 0xFFFFFFFFL', i));
 	}
 
-	@:to public static inline function toULong(i:U64):ULong {
+	@:to public static inline function toULong(i:ULong):ULong {
 		return ULong.valueOf(i.longValue());
 	}
 
