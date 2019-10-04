@@ -1,13 +1,13 @@
 {
   "name": "Numerix",
-  "url" : "https://github.com/YOUR_NAME/Numerix/",
+  "url" : "https://github.com/darmie/Numerix/",
   "license": "MIT",
   "tags": ["haxe","js","cpp","cs","java","neko","hl"],
-  "description": "description of Numerix",
+  "description": "Cross-Platform Native or Simulated Signed and Unsigned Integers and Operations for Haxe",
   "classPath": "src",
   "version": "0.0.1",
   "releasenote": "Initial release",
-  "contributors": ["YOUR_NAME"],
+  "contributors": ["Damilare Akinlaja"],
   "dependencies": {
 
   }
