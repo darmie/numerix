@@ -15,10 +15,16 @@ class Main {
 		// cs.system.BitConverter.ToInt32(cs.system.BitConverter.GetBytes(i2),0);
 		
 		var res:Int = i * cast i2;
-		trace(res);
+		Sys.println(res);
 		var a:U64 = 3;
 		var b:U64 = 5;
-		var mul = a >> b;
-		trace(mul);
+		var mul:I32 = cast (a << b);
+		Sys.println(mul);
+
+
+		var val:U64 = -2000;
+		var uval:U8 = cast val;
+
+		Sys.println(uval);
 	}
 }

@@ -10,8 +10,13 @@ import numerix.ULong;
 
 @:forward(longValue)
 abstract U64(ULong) from ULong {
-	inline function new(i:haxe.Int64) {
+	inline function new(i:Int) {
 		this = ULong.valueOf(untyped __java__('(long){0} & 0xFFFFFFFFL', i));
+	}
+
+
+	@:from public static inline function fromInt(i:Int):U64 {
+		return ULong.valueOf(untyped __java__('(long){0} & 0xFFFFFFFFL', i));
 	}
 
 	@:to public static inline function toULong(i:ULong):ULong {
@@ -19,7 +24,7 @@ abstract U64(ULong) from ULong {
 	}
 
 	@:from public static inline function fromInt64(i:haxe.Int64):U64 {
-		return new U64(i);
+		return ULong.valueOf(untyped __java__('(long){0} & 0xFFFFFFFFL', i));
 	}
 
 	@:to public inline function toInt64():haxe.Int64 {
@@ -62,6 +67,10 @@ abstract U64(ULong) from ULong {
 
 	@:op(a >> s) public inline function shiftRight(s:Int):U64 {
 		return ULong.valueOf(untyped __java__('({0} >> {1}) & 0xFFFFFFFFL', this.longValue(), s));
+	}
+
+	@:op(a << s) public inline function shiftLeft(s:Int):U64 {
+		return ULong.valueOf(untyped __java__('({0} << {1}) & 0xFFFFFFFFL', this.longValue(), s));
 	}
 
 
