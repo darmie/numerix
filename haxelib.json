@@ -5,8 +5,8 @@
   "tags": ["haxe","js","cpp","cs","java","neko","hl"],
   "description": "Cross-Platform Native or Simulated Signed and Unsigned Integers and Operations for Haxe",
   "classPath": "src",
-  "version": "0.0.2",
-  "releasenote": "Added smaller int sizes",
+  "version": "0.0.4",
+  "releasenote": "resolve Java int ops",
   "contributors": ["darmie"],
   "dependencies": {
 
