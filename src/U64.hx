@@ -9,7 +9,7 @@ import numerix.ULong;
 
 
 @:forward(longValue)
-abstract U64(ULong) from ULong {
+abstract U64(ULong) from ULong to ULong {
 	inline function new(i:Int) {
 		this = ULong.valueOf(untyped __java__('(long){0} & 0xFFFFFFFFL', i));
 	}
@@ -43,13 +43,19 @@ abstract U64(ULong) from ULong {
 		return this.add(b);
 	}
 
+	@:op(a+b) public static inline function addInt2(a:Int, b:U64):U64 {
+		return b.add(a);
+	}
+
 	@:op(a+b) public function addInt(b:Int):U64 {
 		return this.addInt(b);
 	}
 
+
 	@:op(a+b) public function addI64(b:I64):U64 {
 		return this.addLong(b);
 	}
+	
 
 	@:op(a-b) public function sub(b:U64):U64 {
 		return this.substract(b);
@@ -63,14 +69,55 @@ abstract U64(ULong) from ULong {
 		return this.subtractI32(b);
 	}
 
+	@:op(-a) public function neg():U64 {
+		return 1 - this.longValue();
+	}
+
+	@:op(a/b) public function div(b:U64):U64 {
+		return U64.fromInt64(untyped __java__('({0} / {1})', this.longValue(), b.longValue()));
+	}
 
 
-	@:op(a >> s) public inline function shiftRight(s:Int):U64 {
+    @:op(a > s) public inline function gt(s:U64) {
+		return untyped __java__('({0} > {1})', this.longValue(), s.longValue());
+	}
+
+    @:op(a < s) public inline function lt(s:U64) {
+		return untyped __java__('({0} < {1})', this.longValue(), s.longValue());
+	}
+
+    @:op(a >= s) public inline function gte(s:U64) {
+		return untyped __java__('({0} >= {1})', this.longValue(), s.longValue());
+	}
+
+    @:op(a <= s) public inline function lte(s:U64) {
+		 return untyped __java__('({0} <= {1})', this.longValue(), s.longValue());
+	}
+
+	@:op(a * s) public inline function mult(s:U64) {
+		return U64.fromInt64(untyped __java__('({0} * {1})', this.longValue(), s.longValue()));
+	}
+
+
+
+	@:op(a >> s) public inline function shiftRighti(s:Int):U64 {
 		return ULong.valueOf(untyped __java__('({0} >> {1}) & 0xFFFFFFFFL', this.longValue(), s));
+	}
+
+	@:op(a % s) public inline function mod(s:U64):U64 {
+		return ULong.valueOf(untyped __java__('({0} % {1}) & 0xFFFFFFFFL', this.longValue(), s.longValue()));
 	}
 
 	@:op(a << s) public inline function shiftLeft(s:Int):U64 {
 		return ULong.valueOf(untyped __java__('({0} << {1}) & 0xFFFFFFFFL', this.longValue(), s));
+	}
+
+	@:op(a & s) public inline function shiftRight(s:U64):U64 {
+		return ULong.valueOf(untyped __java__('({0} & {1}) & 0xFFFFFFFFL', this.longValue(), s.longValue()));
+	}
+
+	@:op(a & s) public static inline function ishiftRight(a:Int, s:U64):U64 {
+		return ULong.valueOf(untyped __java__('({0} & {1}) & 0xFFFFFFFFL', a, s.longValue()));
 	}
 
 
