@@ -53,7 +53,7 @@ class ULong extends java.lang.Number {
 		this.value = v;
 	}
 
-	public static function valueOf(v:Any):ULong {
+	public static function valueOf(v:Dynamic):ULong {
 		return new ULong(cast v);
 	}
 

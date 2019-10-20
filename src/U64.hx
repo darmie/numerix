@@ -1,12 +1,13 @@
 package;
 
+
 #if cpp
 typedef U64 = cpp.UInt64;
 #elseif cs
-typedef U64 = cs.types.UInt64;
+import cs.types.UInt64;
+typedef U64 = UInt64
 #elseif java
 import numerix.ULong;
-
 
 @:forward(longValue)
 abstract U64(ULong) from ULong to ULong {
@@ -49,6 +50,11 @@ abstract U64(ULong) from ULong to ULong {
 
 	@:op(a+b) public function addInt(b:Int):U64 {
 		return this.addInt(b);
+	}
+
+	@:op(a++) public inline function inc():U64 {
+		this = this.add(ULong.valueOf(1));
+		return this;
 	}
 
 
